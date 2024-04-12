@@ -17,6 +17,7 @@ let finalItems="";
 
 // Function to handle click event on addToCart buttons
 document.querySelectorAll('.addToCartButton').forEach(button => {
+    console.log(button);
     button.addEventListener('click', addToCart); // Don't invoke addToCart here, just pass the reference
 });
 
