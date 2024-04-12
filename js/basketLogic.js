@@ -12,6 +12,47 @@ postButtonDemoElements.forEach(function(button) {
     });
 });
 
+let itemLineIdCounter = 1; // Initialize item line ID counter
+
+        // Function to handle click event on addToCart buttons
+        document.querySelectorAll('.addToCartButton').forEach(button => {
+            button.addEventListener('click', addToCart);
+        });
+
+function addToCart(event) {
+            const itemCode = event.target.getAttribute('item-value'); // Get item code from button attribute
+            const basePrice = parseFloat(event.target.getAttribute('value')); // Get base price from button attribute
+
+            const item = {
+                "itemCode": itemCode
+            };
+
+            const cartItem = {
+                "itemLineId": itemLineIdCounter++,
+                "item": item,
+                "quantity": 1,
+                "price": {
+                    "basePrice": basePrice,
+                    "currentPrice": basePrice
+                },
+                "lineAmount": {
+                    "currency": "EUR",
+                    "value": basePrice
+                },
+                "inventoryOrigin": {
+                    "warehouseId": "FR0041"
+                }
+            };
+
+            const jsonString = JSON.stringify(cartItem);
+            const existingItems = localStorage.getItem('cartItems');
+
+            // If there are existing items in the cart, add a comma before appending the new item
+            const updatedItems = existingItems ? `${existingItems},${jsonString}` : jsonString;
+
+            localStorage.setItem('cartItems', updatedItems);
+        }
+
 
 // document.getElementById('liveStoreBasket').addEventListener('click', function() {
 
