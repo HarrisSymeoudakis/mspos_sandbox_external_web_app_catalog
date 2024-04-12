@@ -15,15 +15,26 @@ postButtonDemoElements.forEach(function(button) {
 let itemLineIdCounter = 1; // Initialize item line ID counter
 let finalItems="";
 
-// Function to handle click event on addToCart buttons
-document.querySelectorAll('.addToCartButton').forEach(button => {
-    console.log(button);
-    button.addEventListener('click', addToCart); // Don't invoke addToCart here, just pass the reference
-});
+var addToCartButtonElements = document.querySelectorAll('.addToCartButton');
 
-function addToCart(event) {
-    const itemCode = event.target.getAttribute('item'); // Get item code from button attribute
-    const basePrice = parseFloat(event.target.getAttribute('item-value')); // Get base price from button attribute
+postButtonDemoElements.forEach(function(button) {
+    button.addEventListener('click', function(event) {
+        const itemCode = event.target.getAttribute('item'); // Get item code from button attribute
+        const basePrice = parseFloat(event.target.getAttribute('item-value')); // Get base price from button attribute
+        console.log("im in);
+        addToCart(itemCode,basePrice)
+
+      
+    });
+});
+// Function to handle click event on addToCart buttons
+// document.querySelectorAll('.addToCartButton').forEach(button => {
+//     console.log(button);
+//     button.addEventListener('click', addToCart); // Don't invoke addToCart here, just pass the reference
+// });
+
+function addToCart(itemCode,basePrice) {
+   
     console.log("okkkk");
     const item = {
         "itemCode": itemCode
