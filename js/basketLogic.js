@@ -22,8 +22,8 @@ document.querySelectorAll('.addToCartButton').forEach(button => {
 });
 
 function addToCart(event) {
-    const itemCode = event.target.getAttribute('item-value'); // Get item code from button attribute
-    const basePrice = parseFloat(event.target.getAttribute('value')); // Get base price from button attribute
+    const itemCode = event.target.getAttribute('item'); // Get item code from button attribute
+    const basePrice = parseFloat(event.target.getAttribute('item-value')); // Get base price from button attribute
     console.log("okkkk");
     const item = {
         "itemCode": itemCode
