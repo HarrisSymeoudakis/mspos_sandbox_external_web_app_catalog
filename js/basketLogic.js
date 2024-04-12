@@ -17,7 +17,7 @@ let finalItems="";
 
 var addToCartButtonElements = document.querySelectorAll('.addToCartButton');
 
-postButtonDemoElements.forEach(function(button) {
+addToCartButtonElements.forEach(function(button) {
     button.addEventListener('click', function(event) {
         const itemCode = event.target.getAttribute('item'); // Get item code from button attribute
         const basePrice = parseFloat(event.target.getAttribute('item-value')); // Get base price from button attribute
