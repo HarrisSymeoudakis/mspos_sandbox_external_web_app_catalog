@@ -272,9 +272,7 @@ document.getElementById('viewBasketAll').addEventListener('click', function() {
                 "customer": {
                     "customerCode": customerId // Change the value dynamically here
                 },
-                "itemLines": [
-                   localStorage.getItem('cartItems')
-                ],
+                "itemLines":  JSON.parse("[" + jsonString + "]"),
                 "store": {
                     "storeId": "FR004"
                 }
