@@ -13,6 +13,7 @@ postButtonDemoElements.forEach(function(button) {
 });
 
 let itemLineIdCounter = 1; // Initialize item line ID counter
+let finalItems="";
 
         // Function to handle click event on addToCart buttons
         document.querySelectorAll('.addToCartButton').forEach(button => {
@@ -22,7 +23,7 @@ let itemLineIdCounter = 1; // Initialize item line ID counter
 function addToCart(event) {
             const itemCode = event.target.getAttribute('item-value'); // Get item code from button attribute
             const basePrice = parseFloat(event.target.getAttribute('value')); // Get base price from button attribute
-
+            console.log("okkkk");
             const item = {
                 "itemCode": itemCode
             };
