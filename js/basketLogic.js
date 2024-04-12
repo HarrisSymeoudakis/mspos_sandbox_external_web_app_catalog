@@ -1,3 +1,7 @@
+window.onload = function() {
+    localStorage.setItem('cartItems', "");
+};
+
 var postButtonDemoElements = document.querySelectorAll('.postButtonDemo');
 
 // Loop through each button and attach event listener
