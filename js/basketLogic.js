@@ -275,77 +275,77 @@ document.getElementById('viewBasketAll').addEventListener('click', function() {
     });
 });
 
-document.getElementById('testButton').addEventListener('click', function(event) {
-    // var parameter1 = event.target.getAttribute('data-parameter1');
-    var value = event.target.getAttribute('item-value');
-    var item = event.target.getAttribute('item');
+// document.getElementById('testButton').addEventListener('click', function(event) {
+//     // var parameter1 = event.target.getAttribute('data-parameter1');
+//     var value = event.target.getAttribute('item-value');
+//     var item = event.target.getAttribute('item');
 
-    getToken(function(error, accessToken) {
-        if (error) {
-            console.error('Error:', error);
-            console.log('Error:', error);
-        } else {
-            console.log("passed");
-            var xhr = new XMLHttpRequest();
-            var postUrl = 'http://localhost:3000/t/pos/external-basket/v1'; // Proxy server URL
-            // var postUrl = 'http://retail-services.cegid.cloud/t/pos/external-basket/v1'
-            xhr.open('POST', postUrl, true);
-            xhr.setRequestHeader('Content-Type', 'application/json');
-            xhr.setRequestHeader('Authorization', 'Bearer ' + accessToken); // Include access token in the request headers
+//     getToken(function(error, accessToken) {
+//         if (error) {
+//             console.error('Error:', error);
+//             console.log('Error:', error);
+//         } else {
+//             console.log("passed");
+//             var xhr = new XMLHttpRequest();
+//             var postUrl = 'http://localhost:3000/t/pos/external-basket/v1'; // Proxy server URL
+//             // var postUrl = 'http://retail-services.cegid.cloud/t/pos/external-basket/v1'
+//             xhr.open('POST', postUrl, true);
+//             xhr.setRequestHeader('Content-Type', 'application/json');
+//             xhr.setRequestHeader('Authorization', 'Bearer ' + accessToken); // Include access token in the request headers
 
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState === 4) {
-                    if (xhr.status === 200) {
-                        console.log('POST request successful');
-                        var response = JSON.parse(xhr.responseText);
-                        if (response.externalBasketUrl) {
-                            window.location.href = response.externalBasketUrl;
-                        }
-                    } else {
-                        console.error('Error:', xhr.status);
-                        // Handle error if needed
-                    }
-                }
-            };
+//             xhr.onreadystatechange = function() {
+//                 if (xhr.readyState === 4) {
+//                     if (xhr.status === 200) {
+//                         console.log('POST request successful');
+//                         var response = JSON.parse(xhr.responseText);
+//                         if (response.externalBasketUrl) {
+//                             window.location.href = response.externalBasketUrl;
+//                         }
+//                     } else {
+//                         console.error('Error:', xhr.status);
+//                         // Handle error if needed
+//                     }
+//                 }
+//             };
 
-            var customerId = "HAM0100009";
-            var postData = {
-                "externalReference": "SimpleSale",
-                "basketType": "RECEIPT",
-                "customer": {
-                    "customerCode": customerId // Change the value dynamically here
-                },
-                "itemLines": [
-                    {
-                        "itemLineId": 1,
-                        "item": {
-                            "itemCode": item
-                        },
-                        "quantity": 1,
-                        "price": {
-                            "basePrice": value,
-                            "currentPrice": value
-                        },
-                        "lineAmount": {
-                            "currency": "EUR",
-                            "value": value
-                        },
-                        "inventoryOrigin": {
-                            "warehouseId": "FR0041"
-                        }
-                    }
-                ],
-                "store": {
-                    "storeId": "FR004"
-                }
-            };
+//             var customerId = "HAM0100009";
+//             var postData = {
+//                 "externalReference": "SimpleSale",
+//                 "basketType": "RECEIPT",
+//                 "customer": {
+//                     "customerCode": customerId // Change the value dynamically here
+//                 },
+//                 "itemLines": [
+//                     {
+//                         "itemLineId": 1,
+//                         "item": {
+//                             "itemCode": item
+//                         },
+//                         "quantity": 1,
+//                         "price": {
+//                             "basePrice": value,
+//                             "currentPrice": value
+//                         },
+//                         "lineAmount": {
+//                             "currency": "EUR",
+//                             "value": value
+//                         },
+//                         "inventoryOrigin": {
+//                             "warehouseId": "FR0041"
+//                         }
+//                     }
+//                 ],
+//                 "store": {
+//                     "storeId": "FR004"
+//                 }
+//             };
 
-            // Convert postData to JSON string
-            var postDataString = JSON.stringify(postData);
-            console.log(postDataString);
-            xhr.send(postDataString);
-        }
-    });
-});
+//             // Convert postData to JSON string
+//             var postDataString = JSON.stringify(postData);
+//             console.log(postDataString);
+//             xhr.send(postDataString);
+//         }
+//     });
+// });
 
 
