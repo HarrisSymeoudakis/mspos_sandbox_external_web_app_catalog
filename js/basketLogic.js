@@ -101,7 +101,8 @@ function removeFromCart(itemCode, basePrice) {
     console.log("inside remove from cart");
   var cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
     
-    
+    console.log('Item code:', itemCode);
+    console.log('Cart items:', cartItems);
     // Find the item with the given itemCode
     var itemIndex = cartItems.findIndex(item => item.itemCode === itemCode);
     console.log(cartItems[itemIndex]);
