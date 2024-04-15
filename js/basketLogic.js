@@ -324,20 +324,68 @@ function getToken(callback) {
     tokenRequest.send(tokenData);
 }
 
-document.getElementById('viewBasketAll').addEventListener('click', function() {
-    // var parameter1 = event.target.getAttribute('data-parameter1');
+// document.getElementById('viewBasketAll').addEventListener('click', function() {
+//     // var parameter1 = event.target.getAttribute('data-parameter1');
     
 
+//     getToken(function(error, accessToken) {
+//         if (error) {
+//             console.error('Error:', error);
+//             console.log('Error:', error);
+//         } else {
+//             console.log("passed");
+//             var xhr = new XMLHttpRequest();
+//             // var postUrl = 'https://eo533oscrky2sxp.m.pipedream.net'
+//             var postUrl = 'http://localhost:3000/et/pos/external-basket/v1'; // Proxy server URL
+//             // var postUrl = 'http://retail-services.cegid.cloud/et/pos/external-basket/v1'
+//             xhr.open('POST', postUrl, true);
+//             xhr.setRequestHeader('Content-Type', 'application/json');
+//             xhr.setRequestHeader('Authorization', 'Bearer ' + accessToken); // Include access token in the request headers
+
+//             xhr.onreadystatechange = function() {
+//                 if (xhr.readyState === 4) {
+//                     if (xhr.status === 200) {
+//                         console.log('POST request successful');
+//                         var response = JSON.parse(xhr.responseText);
+//                         if (response.externalBasketUrl) {
+//                             window.location.href = response.externalBasketUrl;
+//                         }
+//                     } else {
+//                         console.error('Error:', xhr.status);
+//                         // Handle error if needed
+//                     }
+//                 }
+//             };
+
+//             var customerId = "HQ00100001";
+//             var postData = {
+//                 "externalReference": "SimpleSale",
+//                 "basketType": "RECEIPT",
+//                 "customer": {
+//                     "customerCode": customerId // Change the value dynamically here
+//                 },
+//                 "itemLines":  JSON.parse( localStorage.getItem('cartItems')),
+//                 "store": {
+//                     "storeId": "FR004"
+//                 }
+//             };
+
+//             // Convert postData to JSON string
+//             console.log(postData);
+//             var postDataString = JSON.stringify(postData);
+//             console.log(postDataString);
+//             xhr.send(postDataString);
+//         }
+//     });
+// });
+
+document.getElementById('viewBasketAll').addEventListener('click', function() {
     getToken(function(error, accessToken) {
         if (error) {
             console.error('Error:', error);
-            console.log('Error:', error);
         } else {
-            console.log("passed");
             var xhr = new XMLHttpRequest();
-            // var postUrl = 'https://eo533oscrky2sxp.m.pipedream.net'
             var postUrl = 'http://localhost:3000/et/pos/external-basket/v1'; // Proxy server URL
-            // var postUrl = 'http://retail-services.cegid.cloud/et/pos/external-basket/v1'
             xhr.open('POST', postUrl, true);
             xhr.setRequestHeader('Content-Type', 'application/json');
             xhr.setRequestHeader('Authorization', 'Bearer ' + accessToken); // Include access token in the request headers
@@ -357,6 +405,17 @@ document.getElementById('viewBasketAll').addEventListener('click', function() {
                 }
             };
 
+            // Retrieve cart items from localStorage
+            var cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+            
+            // Filter out items with quantity greater than 0
+            cartItems = cartItems.filter(item => item.quantity > 0);
+
+            // Re-enumerate itemLineId
+            cartItems.forEach((item, index) => {
+                item.itemLineId = index + 1; // Increment index by 1
+            });
+
             var customerId = "HQ00100001";
             var postData = {
                 "externalReference": "SimpleSale",
@@ -364,20 +423,19 @@ document.getElementById('viewBasketAll').addEventListener('click', function() {
                 "customer": {
                     "customerCode": customerId // Change the value dynamically here
                 },
-                "itemLines":  JSON.parse( localStorage.getItem('cartItems')),
+                "itemLines": cartItems,
                 "store": {
                     "storeId": "FR004"
                 }
             };
 
             // Convert postData to JSON string
-            console.log(postData);
             var postDataString = JSON.stringify(postData);
-            console.log(postDataString);
             xhr.send(postDataString);
         }
     });
 });
+
 
 // document.getElementById('testButton').addEventListener('click', function(event) {
 //     // var parameter1 = event.target.getAttribute('data-parameter1');
