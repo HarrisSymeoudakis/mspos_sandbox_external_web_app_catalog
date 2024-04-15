@@ -258,9 +258,9 @@ function addToCart(itemCode, basePrice) {
 function getToken(callback) {
     console.log("hello");
     var tokenRequest = new XMLHttpRequest();
-    var tokenUrl = 'http://localhost:3000/t/as/connect/token'; // Proxy server URL
-    // var tokenUrl = 'http://retail-services.cegid.cloud/t/as/connect/token'; // Proxy server URL
-    var tokenData = 'client_id=CegidRetailResourceFlowClient&username=Harris@90571062_002_TEST&password=Cegid2&grant_type=password&scope=RetailBackendApi offline_access'; // Construct x-www-form-urlencoded body
+    var tokenUrl = 'http://localhost:3000/et/as/connect/token'; // Proxy server URL
+    // var tokenUrl = 'http://retail-services.cegid.cloud/et/as/connect/token'; // Proxy server URL
+    var tokenData = 'client_id=CegidRetailResourceFlowClient&username=AI@90478305_003_TEST&password=1234&grant_type=password&scope=RetailBackendApi offline_access'; // Construct x-www-form-urlencoded body
 
     tokenRequest.open('POST', tokenUrl, true);
     tokenRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
@@ -294,8 +294,8 @@ document.getElementById('viewBasketAll').addEventListener('click', function() {
             console.log("passed");
             var xhr = new XMLHttpRequest();
             // var postUrl = 'https://eo533oscrky2sxp.m.pipedream.net'
-            var postUrl = 'http://localhost:3000/t/pos/external-basket/v1'; // Proxy server URL
-            // var postUrl = 'http://retail-services.cegid.cloud/t/pos/external-basket/v1'
+            var postUrl = 'http://localhost:3000/et/pos/external-basket/v1'; // Proxy server URL
+            // var postUrl = 'http://retail-services.cegid.cloud/et/pos/external-basket/v1'
             xhr.open('POST', postUrl, true);
             xhr.setRequestHeader('Content-Type', 'application/json');
             xhr.setRequestHeader('Authorization', 'Bearer ' + accessToken); // Include access token in the request headers
