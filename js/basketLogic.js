@@ -98,7 +98,9 @@ function addToCart(itemCode, basePrice) {
 
 
 function removeFromCart(itemCode, basePrice) {
+    console.log("inside remove from cart");
   var cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+    console.log(cartItems);
     
     // Find the item with the given itemCode
     var itemIndex = cartItems.findIndex(item => item.itemCode === itemCode);
