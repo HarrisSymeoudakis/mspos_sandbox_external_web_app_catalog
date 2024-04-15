@@ -104,7 +104,7 @@ function removeFromCart(itemCode, basePrice) {
     
     // Find the item with the given itemCode
     var itemIndex = cartItems.findIndex(item => item.itemCode === itemCode);
-
+    console.log(cartItems[itemIndex]);
     // If the item exists in the cart and its quantity is greater than 0, decrease the quantity by 1
     if (itemIndex !== -1 && cartItems[itemIndex].quantity > 0) {
         cartItems[itemIndex].quantity--;
