@@ -322,13 +322,14 @@ document.getElementById('viewBasketAll').addEventListener('click', function() {
                 "customer": {
                     "customerCode": customerId // Change the value dynamically here
                 },
-                "itemLines":  localStorage.getItem('cartItems'),
+                "itemLines":  JSON.parse( localStorage.getItem('cartItems')),
                 "store": {
                     "storeId": "FR004"
                 }
             };
 
             // Convert postData to JSON string
+            console.log(postData);
             var postDataString = JSON.stringify(postData);
             console.log(postDataString);
             xhr.send(postDataString);
