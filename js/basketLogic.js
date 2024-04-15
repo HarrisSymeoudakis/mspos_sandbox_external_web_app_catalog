@@ -37,51 +37,73 @@ addToCartButtonElements.forEach(function(button) {
 //     button.addEventListener('click', addToCart); // Don't invoke addToCart here, just pass the reference
 // });
 
-function addToCart(itemCode, basePrice) {
-    // Retrieve cart items from localStorage
-    const existingItems = localStorage.getItem('cartItems');
+// function addToCart(itemCode, basePrice) {
+//     // Retrieve cart items from localStorage
+//     const existingItems = localStorage.getItem('cartItems');
     
-    // Parse the cart items JSON string into an array
-    const cartItems = existingItems ? JSON.parse(existingItems) : [];
+//     // Parse the cart items JSON string into an array
+//     const cartItems = existingItems ? JSON.parse(existingItems) : [];
 
-    // Check if the item already exists in the cart
-    const existingItemIndex = cartItems.findIndex(item => item.item.itemCode === itemCode);
+//     // Check if the item already exists in the cart
+//     const existingItemIndex = cartItems.findIndex(item => item.item.itemCode === itemCode);
 
-    if (existingItemIndex !== -1) {
-        // If the item already exists in the cart, increase its quantity by 1
-        cartItems[existingItemIndex].quantity++;
-    } else {
-        // If the item doesn't exist in the cart, create a new cart item
-        const item = {
-            "itemCode": itemCode
-        };
+//     if (existingItemIndex !== -1) {
+//         // If the item already exists in the cart, increase its quantity by 1
+//         cartItems[existingItemIndex].quantity++;
+//     } else {
+//         // If the item doesn't exist in the cart, create a new cart item
+//         const item = {
+//             "itemCode": itemCode
+//         };
 
-        const cartItem = {
-            "itemLineId": itemLineIdCounter++,
-            "item": item,
-            "quantity": 1,
-            "price": {
-                "basePrice": basePrice,
-                "currentPrice": basePrice
-            },
-            "lineAmount": {
-                "currency": "EUR",
-                "value": basePrice
-            },
-            "inventoryOrigin": {
-                "warehouseId": "FR0041"
-            }
-        };
+//         const cartItem = {
+//             "itemLineId": itemLineIdCounter++,
+//             "item": item,
+//             "quantity": 1,
+//             "price": {
+//                 "basePrice": basePrice,
+//                 "currentPrice": basePrice
+//             },
+//             "lineAmount": {
+//                 "currency": "EUR",
+//                 "value": basePrice
+//             },
+//             "inventoryOrigin": {
+//                 "warehouseId": "FR0041"
+//             }
+//         };
 
-        // Add the new cart item to the cartItems array
-        cartItems.push(cartItem);
-    }
+//         // Add the new cart item to the cartItems array
+//         cartItems.push(cartItem);
+//     }
 
-    // Convert the updated cartItems array back to JSON string and store it in localStorage
-    localStorage.setItem('cartItems', JSON.stringify(cartItems));
-}
+//     // Convert the updated cartItems array back to JSON string and store it in localStorage
+//     localStorage.setItem('cartItems', JSON.stringify(cartItems));
+// }
 
+function addToCart(itemCode,basePrice) {
+   
+    console.log("okkkk");
+    const item = {
+        "itemCode": itemCode
+    };
 
+    const cartItem = {
+        "itemLineId": itemLineIdCounter++,
+        "item": item,
+        "quantity": 1,
+        "price": {
+            "basePrice": basePrice,
+            "currentPrice": basePrice
+        },
+        "lineAmount": {
+            "currency": "EUR",
+            "value": basePrice
+        },
+        "inventoryOrigin": {
+            "warehouseId": "FR0041"
+        }
+    };
 
 
 // document.getElementById('liveStoreBasket').addEventListener('click', function() {
