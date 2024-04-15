@@ -98,16 +98,20 @@ function addToCart(itemCode, basePrice) {
 
 
 function removeFromCart(itemCode, basePrice) {
-    console.log("inside remove from cart");
-  var cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+
     
-    console.log('Item code:', itemCode);
-    console.log('Cart items:', cartItems);
-    // Find the item with the given itemCode
-    var itemIndex = cartItems.findIndex(item => item.itemCode === itemCode);
-    console.log(cartItems[itemIndex]);
+   const existingItems = localStorage.getItem('cartItems');
+    
+    // Parse the cart items JSON string into an array
+    const cartItems = existingItems ? JSON.parse(existingItems) : [];
+ console.log(cartItems);
+    // Check if the item already exists in the cart
+    const existingItemIndex = cartItems.findIndex(item => item.item.itemCode === itemCode);
+    
+    
+    console.log(cartItems[existingItemIndex]);
     // If the item exists in the cart and its quantity is greater than 0, decrease the quantity by 1
-    if (itemIndex !== -1 && cartItems[itemIndex].quantity > 0) {
+    if (existingItemIndex !== -1 ) {
         cartItems[itemIndex].quantity--;
 
         console.log(cartItems);
