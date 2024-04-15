@@ -37,82 +37,83 @@ addToCartButtonElements.forEach(function(button) {
 //     button.addEventListener('click', addToCart); // Don't invoke addToCart here, just pass the reference
 // });
 
-// function addToCart(itemCode, basePrice) {
-//     // Retrieve cart items from localStorage
-//     const existingItems = localStorage.getItem('cartItems');
-    
-//     // Parse the cart items JSON string into an array
-//     const cartItems = existingItems ? JSON.parse(existingItems) : [];
-
-//     // Check if the item already exists in the cart
-//     const existingItemIndex = cartItems.findIndex(item => item.item.itemCode === itemCode);
-
-//     if (existingItemIndex !== -1) {
-//         // If the item already exists in the cart, increase its quantity by 1
-//         cartItems[existingItemIndex].quantity++;
-//     } else {
-//         // If the item doesn't exist in the cart, create a new cart item
-//         const item = {
-//             "itemCode": itemCode
-//         };
-
-//         const cartItem = {
-//             "itemLineId": itemLineIdCounter++,
-//             "item": item,
-//             "quantity": 1,
-//             "price": {
-//                 "basePrice": basePrice,
-//                 "currentPrice": basePrice
-//             },
-//             "lineAmount": {
-//                 "currency": "EUR",
-//                 "value": basePrice
-//             },
-//             "inventoryOrigin": {
-//                 "warehouseId": "FR0041"
-//             }
-//         };
-
-//         // Add the new cart item to the cartItems array
-//         cartItems.push(cartItem);
-//     }
-
-//     // Convert the updated cartItems array back to JSON string and store it in localStorage
-//     localStorage.setItem('cartItems', JSON.stringify(cartItems));
-// }
-
-function addToCart(itemCode,basePrice) {
-   
-    console.log("okkkk");
-    const item = {
-        "itemCode": itemCode
-    };
-
-    const cartItem = {
-        "itemLineId": itemLineIdCounter++,
-        "item": item,
-        "quantity": 1,
-        "price": {
-            "basePrice": basePrice,
-            "currentPrice": basePrice
-        },
-        "lineAmount": {
-            "currency": "EUR",
-            "value": basePrice
-        },
-        "inventoryOrigin": {
-            "warehouseId": "FR0041"
-        }
-    };
-
-    const jsonString = JSON.stringify(cartItem);
+function addToCart(itemCode, basePrice) {
+    // Retrieve cart items from localStorage
     const existingItems = localStorage.getItem('cartItems');
+    
+    // Parse the cart items JSON string into an array
+    const cartItems = existingItems ? JSON.parse(existingItems) : [];
+ console.log("got stuck");
+    // Check if the item already exists in the cart
+    const existingItemIndex = cartItems.findIndex(item => item.item.itemCode === itemCode);
 
-    // If there are existing items in the cart, add a comma before appending the new item
-    const updatedItems = existingItems ? `${existingItems},${jsonString}` : jsonString;
-    console.log(updatedItems);
-    localStorage.setItem('cartItems', updatedItems);
+    if (existingItemIndex !== -1) {
+        console.log("it exists");
+        // If the item already exists in the cart, increase its quantity by 1
+        cartItems[existingItemIndex].quantity++;
+    } else {
+        // If the item doesn't exist in the cart, create a new cart item
+        const item = {
+            "itemCode": itemCode
+        };
+
+        const cartItem = {
+            "itemLineId": itemLineIdCounter++,
+            "item": item,
+            "quantity": 1,
+            "price": {
+                "basePrice": basePrice,
+                "currentPrice": basePrice
+            },
+            "lineAmount": {
+                "currency": "EUR",
+                "value": basePrice
+            },
+            "inventoryOrigin": {
+                "warehouseId": "FR0041"
+            }
+        };
+
+        // Add the new cart item to the cartItems array
+        cartItems.push(cartItem);
+    }
+
+    // Convert the updated cartItems array back to JSON string and store it in localStorage
+    localStorage.setItem('cartItems', JSON.stringify(cartItems));
 }
+
+// function addToCart(itemCode,basePrice) {
+   
+//     console.log("okkkk");
+//     const item = {
+//         "itemCode": itemCode
+//     };
+
+//     const cartItem = {
+//         "itemLineId": itemLineIdCounter++,
+//         "item": item,
+//         "quantity": 1,
+//         "price": {
+//             "basePrice": basePrice,
+//             "currentPrice": basePrice
+//         },
+//         "lineAmount": {
+//             "currency": "EUR",
+//             "value": basePrice
+//         },
+//         "inventoryOrigin": {
+//             "warehouseId": "FR0041"
+//         }
+//     };
+
+//     const jsonString = JSON.stringify(cartItem);
+//     const existingItems = localStorage.getItem('cartItems');
+
+//     // If there are existing items in the cart, add a comma before appending the new item
+//     const updatedItems = existingItems ? `${existingItems},${jsonString}` : jsonString;
+//     console.log(updatedItems);
+//     localStorage.setItem('cartItems', updatedItems);
+// }
 
 // document.getElementById('liveStoreBasket').addEventListener('click', function() {
 
