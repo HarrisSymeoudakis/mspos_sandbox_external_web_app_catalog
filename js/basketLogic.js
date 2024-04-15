@@ -249,8 +249,8 @@ document.getElementById('viewBasketAll').addEventListener('click', function() {
         } else {
             console.log("passed");
             var xhr = new XMLHttpRequest();
-            var postUrl = 'https://eo533oscrky2sxp.m.pipedream.net'
-            // var postUrl = 'http://localhost:3000/t/pos/external-basket/v1'; // Proxy server URL
+            // var postUrl = 'https://eo533oscrky2sxp.m.pipedream.net'
+            var postUrl = 'http://localhost:3000/t/pos/external-basket/v1'; // Proxy server URL
             // var postUrl = 'http://retail-services.cegid.cloud/t/pos/external-basket/v1'
             xhr.open('POST', postUrl, true);
             xhr.setRequestHeader('Content-Type', 'application/json');
