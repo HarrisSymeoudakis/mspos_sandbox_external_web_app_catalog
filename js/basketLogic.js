@@ -105,6 +105,14 @@ function addToCart(itemCode,basePrice) {
         }
     };
 
+    const jsonString = JSON.stringify(cartItem);
+    const existingItems = localStorage.getItem('cartItems');
+
+    // If there are existing items in the cart, add a comma before appending the new item
+    const updatedItems = existingItems ? `${existingItems},${jsonString}` : jsonString;
+    console.log(updatedItems);
+    localStorage.setItem('cartItems', updatedItems);
+}
 
 // document.getElementById('liveStoreBasket').addEventListener('click', function() {
 
