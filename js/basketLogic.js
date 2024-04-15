@@ -100,7 +100,7 @@ function addToCart(itemCode, basePrice) {
 function removeFromCart(itemCode, basePrice) {
     console.log("inside remove from cart");
   var cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
-    console.log(cartItems);
+    
     
     // Find the item with the given itemCode
     var itemIndex = cartItems.findIndex(item => item.itemCode === itemCode);
@@ -109,12 +109,10 @@ function removeFromCart(itemCode, basePrice) {
     if (itemIndex !== -1 && cartItems[itemIndex].quantity > 0) {
         cartItems[itemIndex].quantity--;
 
-        // If the quantity becomes 0, remove the item from the cart
-        if (cartItems[itemIndex].quantity === 0) {
-            cartItems.splice(itemIndex, 1);
-        }
+        console.log(cartItems);
+        
 
-         console.log(cartItems);
+        
         // Update localStorage with the updated cart items
         localStorage.setItem('cartItems', JSON.stringify(cartItems));
     }
