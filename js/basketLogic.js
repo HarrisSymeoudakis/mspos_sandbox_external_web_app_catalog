@@ -43,7 +43,7 @@ function addToCart(itemCode, basePrice) {
     
     // Parse the cart items JSON string into an array
     const cartItems = existingItems ? JSON.parse(existingItems) : [];
- console.log("got stuck");
+ console.log(cartItems);
     // Check if the item already exists in the cart
     const existingItemIndex = cartItems.findIndex(item => item.item.itemCode === itemCode);
 
