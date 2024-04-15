@@ -52,6 +52,7 @@ function addToCart(itemCode, basePrice) {
         // If the item already exists in the cart, increase its quantity by 1
         cartItems[existingItemIndex].quantity++;
     } else {
+        console.log("got inside else");
         // If the item doesn't exist in the cart, create a new cart item
         const item = {
             "itemCode": itemCode
@@ -77,7 +78,7 @@ function addToCart(itemCode, basePrice) {
         // Add the new cart item to the cartItems array
         cartItems.push(cartItem);
     }
-
+    console.log(cartItems);
     // Convert the updated cartItems array back to JSON string and store it in localStorage
     localStorage.setItem('cartItems', JSON.stringify(cartItems));
 }
