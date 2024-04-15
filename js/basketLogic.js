@@ -176,7 +176,7 @@ function addToCart(itemCode, basePrice) {
 //                     }
 //                 }
 //             };
-//             var customerId = "HAM0100009"
+//             var customerId = "HQ00100001"
 //             var postData = {
 //                 "externalReference": "SimpleSale",
 //                 "basketType": "RECEIPT",
