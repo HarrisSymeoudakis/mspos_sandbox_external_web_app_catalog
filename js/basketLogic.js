@@ -315,7 +315,7 @@ document.getElementById('viewBasketAll').addEventListener('click', function() {
                 }
             };
 
-            var customerId = "HAM0100009";
+            var customerId = "HQ00100001";
             var postData = {
                 "externalReference": "SimpleSale",
                 "basketType": "RECEIPT",
