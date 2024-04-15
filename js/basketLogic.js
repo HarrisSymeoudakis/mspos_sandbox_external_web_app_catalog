@@ -112,7 +112,7 @@ function removeFromCart(itemCode, basePrice) {
     console.log(cartItems[existingItemIndex]);
     // If the item exists in the cart and its quantity is greater than 0, decrease the quantity by 1
     if (existingItemIndex !== -1 ) {
-        cartItems[itemIndex].quantity--;
+        cartItems[existingItemIndex].quantity--;
 
         console.log(cartItems);
         
