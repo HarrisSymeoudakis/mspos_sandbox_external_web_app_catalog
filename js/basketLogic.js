@@ -31,6 +31,19 @@ addToCartButtonElements.forEach(function(button) {
       
     });
 });
+
+var removeFromCartButtonElements = document.querySelectorAll('.removeFromBasket');
+
+removeFromCartButtonElements.forEach(function(button) {
+    button.addEventListener('click', function(event) {
+        const itemCode = event.target.getAttribute('item'); // Get item code from button attribute
+        const basePrice = parseFloat(event.target.getAttribute('item-value')); // Get base price from button attribute
+        console.log("im in");
+        removeFromCart(itemCode,basePrice)
+
+      
+    });
+});
 // Function to handle click event on addToCart buttons
 // document.querySelectorAll('.addToCartButton').forEach(button => {
 //     console.log(button);
@@ -82,6 +95,30 @@ function addToCart(itemCode, basePrice) {
     // Convert the updated cartItems array back to JSON string and store it in localStorage
     localStorage.setItem('cartItems', JSON.stringify(cartItems));
 }
+
+
+function removeFromCart(itemCode, basePrice) {
+  var cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+    
+    // Find the item with the given itemCode
+    var itemIndex = cartItems.findIndex(item => item.itemCode === itemCode);
+
+    // If the item exists in the cart and its quantity is greater than 0, decrease the quantity by 1
+    if (itemIndex !== -1 && cartItems[itemIndex].quantity > 0) {
+        cartItems[itemIndex].quantity--;
+
+        // If the quantity becomes 0, remove the item from the cart
+        if (cartItems[itemIndex].quantity === 0) {
+            cartItems.splice(itemIndex, 1);
+        }
+
+         console.log(cartItems);
+        // Update localStorage with the updated cart items
+        localStorage.setItem('cartItems', JSON.stringify(cartItems));
+    }
+}
+
+
 
 // function addToCart(itemCode,basePrice) {
    
