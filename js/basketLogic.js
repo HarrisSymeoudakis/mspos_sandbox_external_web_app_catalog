@@ -1,9 +1,7 @@
 window.onload = function() {
-    const existingItems = localStorage.getItem('cartItems');
-    if (!existingItems) {
-        // If cartItems is empty or undefined, set it to an empty array
+    
         localStorage.setItem('cartItems', JSON.stringify([]));
-    }
+    
 
 };
 
