@@ -55,18 +55,7 @@ addToCartButtonElements.forEach(function(button) {
 // // Call updateRemoveButtons function initially to set the initial state of remove buttons
 // updateRemoveButtons();
 
-var removeFromCartButtonElements = document.querySelectorAll('.removeFromBasket');
 
-removeFromCartButtonElements.forEach(function(button) {
-    button.addEventListener('click', function(event) {
-        const itemCode = event.target.getAttribute('item'); // Get item code from button attribute
-        const basePrice = parseFloat(event.target.getAttribute('item-value')); // Get base price from button attribute
-        console.log("im in");
-        removeFromCart(itemCode,basePrice)
-
-      
-    });
-});
 // Function to handle click event on addToCart buttons
 // document.querySelectorAll('.addToCartButton').forEach(button => {
 //     console.log(button);
@@ -120,32 +109,53 @@ function addToCart(itemCode, basePrice) {
 }
 
 
-function removeFromCart(itemCode, basePrice) {
+var removeFromCartButtonElements = document.querySelectorAll('.removeFromBasket');
 
-    
-   const existingItems = localStorage.getItem('cartItems');
+removeFromCartButtonElements.forEach(function(button) {
+    button.addEventListener('click', function(event) {
+        const itemCode = event.target.getAttribute('item'); // Get item code from button attribute
+        const basePrice = parseFloat(event.target.getAttribute('item-value')); // Get base price from button attribute
+        
+        removeFromCart(itemCode, basePrice);
+        updateRemoveButtons(); // Update the state of remove buttons after removing an item
+    });
+});
+
+function removeFromCart(itemCode, basePrice) {
+    const existingItems = localStorage.getItem('cartItems');
     
     // Parse the cart items JSON string into an array
     const cartItems = existingItems ? JSON.parse(existingItems) : [];
- console.log(cartItems);
+
     // Check if the item already exists in the cart
     const existingItemIndex = cartItems.findIndex(item => item.item.itemCode === itemCode);
     
-    
-    console.log(cartItems[existingItemIndex]);
     // If the item exists in the cart and its quantity is greater than 0, decrease the quantity by 1
-    if (existingItemIndex !== -1 ) {
-        cartItems[existingItemIndex].quantity--;
+    if (existingItemIndex !== -1) {
+        if (cartItems[existingItemIndex].quantity > 0) {
+            cartItems[existingItemIndex].quantity--;
+        }
 
-        console.log(cartItems);
-        
+        // If the quantity becomes 0, remove the item from the cart
+        if (cartItems[existingItemIndex].quantity === 0) {
+            cartItems.splice(existingItemIndex, 1);
+        }
 
-        
         // Update localStorage with the updated cart items
         localStorage.setItem('cartItems', JSON.stringify(cartItems));
     }
 }
 
+function updateRemoveButtons() {
+    const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+    const removeButtons = document.querySelectorAll('.removeFromBasket');
+
+    removeButtons.forEach(button => {
+        const itemCode = button.getAttribute('item');
+        const itemExists = cartItems.some(item => item.item.itemCode === itemCode);
+        button.disabled = !itemExists;
+    });
+}
 
 
 // function addToCart(itemCode,basePrice) {
