@@ -4,7 +4,7 @@ window.onload = function() {
         // If cartItems is empty or undefined, set it to an empty array
         localStorage.setItem('cartItems', JSON.stringify([]));
     }
-    updateRemoveButtons();
+
 };
 
 let itemLineIdCounter = 1; // Initialize item line ID counter
