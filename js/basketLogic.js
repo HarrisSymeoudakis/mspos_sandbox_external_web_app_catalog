@@ -122,7 +122,7 @@ function openPopup(message, duration) {
   
   popupMessage.textContent = message;
   popup.style.animation = 'fadeIn 0.5s forwards'; // Apply fade in animation
-  
+  popup.style.display = 'block';
   // Automatically close the popup after the specified duration
   setTimeout(function() {
     popup.style.animation = 'fadeOut 0.5s forwards'; // Apply fade out animation
