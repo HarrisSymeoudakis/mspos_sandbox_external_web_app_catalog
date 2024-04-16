@@ -67,7 +67,7 @@ removeFromCartButtonElements.forEach(function(button) {
         const basePrice = parseFloat(event.target.getAttribute('item-value')); // Get base price from button attribute
         
         removeFromCart(itemCode, basePrice);
-        updateRemoveButtons(itemCode); // Update the state of remove buttons after removing an item
+        updateRemoveButton(itemCode); // Update the state of remove buttons after removing an item
     });
 });
 
