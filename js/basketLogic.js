@@ -157,7 +157,7 @@ function updateRemoveButtons() {
     });
 }
 
-
+updateRemoveButtons();
 // function addToCart(itemCode,basePrice) {
    
 //     console.log("okkkk");
