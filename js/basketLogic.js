@@ -1,5 +1,6 @@
 window.onload = function() {
     localStorage.setItem('cartItems', "");
+    updateRemoveButtons();
 };
 
 var postButtonDemoElements = document.querySelectorAll('.postButtonDemo');
@@ -31,54 +32,16 @@ addToCartButtonElements.forEach(function(button) {
       
     });
 });
-// function updateRemoveButtons() {
-//     // Retrieve cart items from localStorage
-//     const existingItems = localStorage.getItem('cartItems');
-    
 
-//     // Get all buttons with class removeButton
-//     var removeButtons = document.querySelectorAll('.removeButton');
-
-//     // Iterate through each remove button
-//     removeButtons.forEach(button => {
-//         // Get the item attribute value of the button
-//         var itemCode = button.getAttribute('item');
-
-//         // Check if the item exists in the cart items
-//         var itemExists = cartItems.some(item => item.itemCode === itemCode && item.quantity>0);
-
-//         // Enable or disable the button based on item existence
-//         button.disabled = !itemExists;
-//     });
-// }
-
-// // Call updateRemoveButtons function initially to set the initial state of remove buttons
-// updateRemoveButtons();
-
-
-// Function to handle click event on addToCart buttons
-// document.querySelectorAll('.addToCartButton').forEach(button => {
-//     console.log(button);
-//     button.addEventListener('click', addToCart); // Don't invoke addToCart here, just pass the reference
-// });
 
 function addToCart(itemCode, basePrice) {
-    // Retrieve cart items from localStorage
-    const existingItems = localStorage.getItem('cartItems');
-    
-    // Parse the cart items JSON string into an array
-    const cartItems = existingItems ? JSON.parse(existingItems) : [];
- console.log(cartItems);
-    // Check if the item already exists in the cart
-    const existingItemIndex = cartItems.findIndex(item => item.item.itemCode === itemCode);
 
+    const existingItems = localStorage.getItem('cartItems'); 
+    const cartItems = existingItems ? JSON.parse(existingItems) : [];
+    const existingItemIndex = cartItems.findIndex(item => item.item.itemCode === itemCode);
     if (existingItemIndex !== -1) {
-        console.log("it exists");
-        // If the item already exists in the cart, increase its quantity by 1
         cartItems[existingItemIndex].quantity++;
     } else {
-        console.log("got inside else");
-        // If the item doesn't exist in the cart, create a new cart item
         const item = {
             "itemCode": itemCode
         };
@@ -99,12 +62,10 @@ function addToCart(itemCode, basePrice) {
                 "warehouseId": "FR0041"
             }
         };
-
-        // Add the new cart item to the cartItems array
+        
         cartItems.push(cartItem);
     }
     console.log(cartItems);
-    // Convert the updated cartItems array back to JSON string and store it in localStorage
     localStorage.setItem('cartItems', JSON.stringify(cartItems));
 }
 
@@ -157,7 +118,7 @@ function updateRemoveButtons() {
     });
 }
 
-updateRemoveButtons();
+
 // function addToCart(itemCode,basePrice) {
    
 //     console.log("okkkk");
