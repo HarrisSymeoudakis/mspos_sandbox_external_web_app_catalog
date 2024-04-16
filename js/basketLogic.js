@@ -53,7 +53,7 @@ function addToCart(itemCode, basePrice) {
         cartItems.push(cartItem);
     }
     console.log(cartItems);
-    updateRemoveButtons();
+    updateRemoveButton(itemCode)
     localStorage.setItem('cartItems', JSON.stringify(cartItems));
 }
 
