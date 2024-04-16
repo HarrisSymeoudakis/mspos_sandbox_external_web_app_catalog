@@ -33,7 +33,8 @@ addToCartButtonElements.forEach(function(button) {
 });
 function updateRemoveButtons() {
     // Retrieve cart items from localStorage
-    var cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+    const existingItems = localStorage.getItem('cartItems');
+    
 
     // Get all buttons with class removeButton
     var removeButtons = document.querySelectorAll('.removeButton');
