@@ -114,6 +114,21 @@ function updateRemoveButton(itemCode) {
     }
 }
 
+function openPopup(message, duration) {
+  const popup = document.getElementById('popup');
+  const popupMessage = document.getElementById('popupMessage');
+  
+  popupMessage.textContent = message;
+  popup.style.animation = 'fadeIn 0.5s forwards'; // Apply fade in animation
+  
+  // Automatically close the popup after the specified duration
+  setTimeout(function() {
+    popup.style.animation = 'fadeOut 0.5s forwards'; // Apply fade out animation
+    setTimeout(function() {
+      popup.style.display = 'none'; // Hide the popup after animation completes
+    }, 500); // Wait for fade out animation duration
+  }, duration);
+}
 
 
 
