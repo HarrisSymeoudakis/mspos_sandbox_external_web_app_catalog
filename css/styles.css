@@ -99,8 +99,9 @@
   right: 20px; /* Adjust as needed */
   background-color: rgba(127, 17, 224, 1)
   color: #f3a32c;
-  padding: 20px;
+  padding: 10px;
   border-radius: 5px;
+  width: 300px;
 }
 
 /* Popup content */
