@@ -92,12 +92,9 @@ function removeFromCart(itemCode, basePrice) {
     }
 }
 
-function updateRemoveButtons(itemCode) {
-    // console.log("eimai sto update");
-    // const existingItems = localStorage.getItem('cartItems');
-    // const cartItems = existingItems ? JSON.parse(existingItems) : [];
-    // const existingItemIndex = cartItems.findIndex(item => item.item.itemCode === itemCode);
-
+// Function to update the state of a specific remove button based on cart items
+function updateRemoveButton(itemCode) {
+    // Retrieve cart items from localStorage
     const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
     
     // Find the item in cartItems
@@ -106,17 +103,18 @@ function updateRemoveButtons(itemCode) {
     // Get the remove button with the matching item code
     const removeButton = document.querySelector(`.removeFromBasket[item="${itemCode}"]`);
 
-    // Check if the item exists in the cart and its quantity is greater than 0
-    const itemExistsAndHasQuantity = cartItem && cartItem.quantity > 0;
+    // Check if the remove button exists
+    if (removeButton) {
+        // Check if the item exists in the cart and its quantity is greater than 0
+        const itemExistsAndHasQuantity = cartItem && cartItem.quantity > 0;
 
-    // Enable or disable the button based on item existence and quantity
-    removeButton.disabled = !itemExistsAndHasQuantity;
-    // removeButtons.forEach(button => {
-    //     const itemCode = button.getAttribute('item');
-    //     const itemExists = cartItems.some(item => item.item.itemCode === itemCode);
-    //     button.disabled = !itemExists;
-    // });
+        // Enable or disable the button based on item existence and quantity
+        removeButton.disabled = !itemExistsAndHasQuantity;
+    } else {
+        console.error(`Remove button for item ${itemCode} not found.`);
+    }
 }
+
 
 
 
