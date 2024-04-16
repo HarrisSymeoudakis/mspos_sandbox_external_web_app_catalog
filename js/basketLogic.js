@@ -16,7 +16,7 @@ addToCartButtonElements.forEach(function(button) {
         const basePrice = parseFloat(event.target.getAttribute('item-value')); 
         addToCart(itemCode,basePrice);
         updateRemoveButton(itemCode);
-        openPopup("successfully added item :"+itemCode , 3);
+        openPopup("successfully added item :"+itemCode , 10);
     });
 });
 
