@@ -128,7 +128,7 @@ function openPopup(message, duration) {
     popup.style.animation = 'fadeOut 0.5s forwards'; // Apply fade out animation
     setTimeout(function() {
       popup.style.display = 'none'; // Hide the popup after animation completes
-    }, 500); // Wait for fade out animation duration
+    }, duration); // Wait for fade out animation duration
   }, duration);
 }
 
