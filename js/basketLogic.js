@@ -16,7 +16,7 @@ addToCartButtonElements.forEach(function(button) {
         const basePrice = parseFloat(event.target.getAttribute('item-value')); 
         addToCart(itemCode,basePrice);
         updateRemoveButton(itemCode);
-        openPopup("successfully added item :"+itemCode , 10);
+        openPopup("successfully added item :"+itemCode , 10000);
     });
 });
 
@@ -128,7 +128,7 @@ function openPopup(message, duration) {
     popup.style.animation = 'fadeOut 0.5s forwards'; // Apply fade out animation
     setTimeout(function() {
       popup.style.display = 'none'; // Hide the popup after animation completes
-    }, duration); // Wait for fade out animation duration
+    }, 500); // Wait for fade out animation duration
   }, duration);
 }
 
