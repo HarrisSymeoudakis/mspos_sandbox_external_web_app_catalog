@@ -31,6 +31,28 @@ addToCartButtonElements.forEach(function(button) {
       
     });
 });
+function updateRemoveButtons() {
+    // Retrieve cart items from localStorage
+    var cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+
+    // Get all buttons with class removeButton
+    var removeButtons = document.querySelectorAll('.removeButton');
+
+    // Iterate through each remove button
+    removeButtons.forEach(button => {
+        // Get the item attribute value of the button
+        var itemCode = button.getAttribute('item');
+
+        // Check if the item exists in the cart items
+        var itemExists = cartItems.some(item => item.itemCode === itemCode && item.quantity>0);
+
+        // Enable or disable the button based on item existence
+        button.disabled = !itemExists;
+    });
+}
+
+// Call updateRemoveButtons function initially to set the initial state of remove buttons
+updateRemoveButtons();
 
 var removeFromCartButtonElements = document.querySelectorAll('.removeFromBasket');
 
