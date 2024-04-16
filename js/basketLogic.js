@@ -62,7 +62,7 @@ removeFromCartButtonElements.forEach(function(button) {
         const basePrice = parseFloat(event.target.getAttribute('item-value')); // Get base price from button attribute
         
         removeFromCart(itemCode, basePrice);
-        updateRemoveButtons(); // Update the state of remove buttons after removing an item
+        updateRemoveButtons(itemCode); // Update the state of remove buttons after removing an item
     });
 });
 
@@ -88,11 +88,25 @@ function removeFromCart(itemCode, basePrice) {
     }
 }
 
-function updateRemoveButtons() {
-    console.log("eimai sto update");
-    // const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
-    // const removeButtons = document.querySelectorAll('.removeFromBasket');
+function updateRemoveButtons(itemCode) {
+    // console.log("eimai sto update");
+    // const existingItems = localStorage.getItem('cartItems');
+    // const cartItems = existingItems ? JSON.parse(existingItems) : [];
+    // const existingItemIndex = cartItems.findIndex(item => item.item.itemCode === itemCode);
 
+    const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+    
+    // Find the item in cartItems
+    const cartItem = cartItems.find(item => item.item.itemCode === itemCode);
+
+    // Get the remove button with the matching item code
+    const removeButton = document.querySelector(`.removeFromBasket[item="${itemCode}"]`);
+
+    // Check if the item exists in the cart and its quantity is greater than 0
+    const itemExistsAndHasQuantity = cartItem && cartItem.quantity > 0;
+
+    // Enable or disable the button based on item existence and quantity
+    removeButton.disabled = !itemExistsAndHasQuantity;
     // removeButtons.forEach(button => {
     //     const itemCode = button.getAttribute('item');
     //     const itemExists = cartItems.some(item => item.item.itemCode === itemCode);
