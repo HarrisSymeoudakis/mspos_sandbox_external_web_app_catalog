@@ -68,11 +68,7 @@ removeFromCartButtonElements.forEach(function(button) {
 
 function removeFromCart(itemCode, basePrice) {
     const existingItems = localStorage.getItem('cartItems');
-    
-   
     const cartItems = existingItems ? JSON.parse(existingItems) : [];
-
-    
     const existingItemIndex = cartItems.findIndex(item => item.item.itemCode === itemCode);
     
     // If the item exists in the cart and its quantity is greater than 0, decrease the quantity by 1
@@ -87,6 +83,7 @@ function removeFromCart(itemCode, basePrice) {
         }
 
         // Update localStorage with the updated cart items
+        console.log(cartItems);
         localStorage.setItem('cartItems', JSON.stringify(cartItems));
     }
 }
