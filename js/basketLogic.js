@@ -92,14 +92,15 @@ function removeFromCart(itemCode, basePrice) {
 }
 
 function updateRemoveButtons() {
-    const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
-    const removeButtons = document.querySelectorAll('.removeFromBasket');
+    console.log("eimai sto update");
+    // const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+    // const removeButtons = document.querySelectorAll('.removeFromBasket');
 
-    removeButtons.forEach(button => {
-        const itemCode = button.getAttribute('item');
-        const itemExists = cartItems.some(item => item.item.itemCode === itemCode);
-        button.disabled = !itemExists;
-    });
+    // removeButtons.forEach(button => {
+    //     const itemCode = button.getAttribute('item');
+    //     const itemExists = cartItems.some(item => item.item.itemCode === itemCode);
+    //     button.disabled = !itemExists;
+    // });
 }
 
 
