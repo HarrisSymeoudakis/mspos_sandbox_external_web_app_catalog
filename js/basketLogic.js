@@ -16,7 +16,7 @@ addToCartButtonElements.forEach(function(button) {
         const basePrice = parseFloat(event.target.getAttribute('item-value')); 
         addToCart(itemCode,basePrice);
         updateRemoveButton(itemCode);
-        openPopup("successfully added item :"+itemCode , 10000);
+        openPopup("successfully added item :"+itemCode , 3000);
     });
 });
 
@@ -67,7 +67,7 @@ removeFromCartButtonElements.forEach(function(button) {
         
         removeFromCart(itemCode, basePrice);
         updateRemoveButton(itemCode); // Update the state of remove buttons after removing an item
-    openPopup("successfully removed item :"+itemCode , 3);
+    openPopup("successfully removed item :"+itemCode , 3000);
     });
 });
 
