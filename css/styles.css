@@ -97,8 +97,8 @@
   z-index: 1;
   bottom: 20px; /* Adjust as needed */
   right: 20px; /* Adjust as needed */
-  background-color: rgba(0, 0, 0, 0.8);
-  color: white;
+  background-color: rgba(127, 17, 224, 1)
+  color: #f3a32c;
   padding: 20px;
   border-radius: 5px;
 }
