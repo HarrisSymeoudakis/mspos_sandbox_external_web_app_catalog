@@ -14,9 +14,10 @@ addToCartButtonElements.forEach(function(button) {
     button.addEventListener('click', function(event) {
         const itemCode = event.target.getAttribute('item'); 
         const basePrice = parseFloat(event.target.getAttribute('item-value')); 
+        const itemName = event.target.getAttribute('item-name'); 
         addToCart(itemCode,basePrice);
         updateRemoveButton(itemCode);
-        openPopup("successfully added item :"+itemCode , 3000);
+        openPopup("successfully added item :"+itemName , 3000);
     });
 });
 
@@ -64,10 +65,10 @@ removeFromCartButtonElements.forEach(function(button) {
     button.addEventListener('click', function(event) {
         const itemCode = event.target.getAttribute('item'); // Get item code from button attribute
         const basePrice = parseFloat(event.target.getAttribute('item-value')); // Get base price from button attribute
-        
+        const itemName = event.target.getAttribute('item-name'); 
         removeFromCart(itemCode, basePrice);
         updateRemoveButton(itemCode); // Update the state of remove buttons after removing an item
-    openPopup("successfully removed item :"+itemCode , 3000);
+    openPopup("successfully removed item :"+itemName , 3000);
     });
 });
 
