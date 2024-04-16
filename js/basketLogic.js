@@ -17,6 +17,7 @@ addToCartButtonElements.forEach(function(button) {
         const itemCode = event.target.getAttribute('item'); 
         const basePrice = parseFloat(event.target.getAttribute('item-value')); 
         addToCart(itemCode,basePrice);
+        updateRemoveButton(itemCode)
     });
 });
 
@@ -53,7 +54,7 @@ function addToCart(itemCode, basePrice) {
         cartItems.push(cartItem);
     }
     console.log(cartItems);
-    updateRemoveButton(itemCode)
+    
     localStorage.setItem('cartItems', JSON.stringify(cartItems));
 }
 
