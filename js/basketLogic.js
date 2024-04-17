@@ -4,6 +4,16 @@ window.onload = function() {
     
 
 };
+document.addEventListener('DOMContentLoaded', async function() {
+    try {
+        const accessToken = await getToken();
+        console.log('Access token:', accessToken);
+        // Use the access token for subsequent requests
+    } catch (error) {
+        console.error('Failed to get access token:', error);
+    }
+});
+
 
 let itemLineIdCounter = 1; // Initialize item line ID counter
 let finalItems="";
@@ -146,8 +156,11 @@ postButtonDemoElements.forEach(function(button) {
         window.location.href = newUrl;
     });
 });
+const axios = require('axios');
 
-function getToken(callback) {
+
+
+async function getToken() {
     console.log("hello");
     var tokenRequest = new XMLHttpRequest();
     var tokenUrl = 'http://localhost:3000/et/as/connect/token'; // Proxy server URL
@@ -161,12 +174,13 @@ function getToken(callback) {
         if (tokenRequest.readyState === 4) {
             if (tokenRequest.status === 200) {
                 var tokenResponse = JSON.parse(tokenRequest.responseText);
-                var accessToken = tokenResponse.access_token;
-                console.log(accessToken);
-                callback(null, accessToken);
+              
+                const accessToken = tokenResponse.access_token;
+                console.log('Access Token:', accessToken);
+        return accessToken;
             } else {
-                var error = new Error('Failed to get token');
-                callback(error, null);
+                console.error('Error:', "error with token");
+      
             }
         }
     };
@@ -176,60 +190,58 @@ function getToken(callback) {
 
 
 
+
 document.getElementById('viewBasketAll').addEventListener('click', function() {
-    getToken(function(error, accessToken) {
-        if (error) {
-            console.error('Error:', error);
-        } else {
-            var xhr = new XMLHttpRequest();
-            var postUrl = 'http://localhost:3000/et/pos/external-basket/v1'; // Proxy server URL
-            xhr.open('POST', postUrl, true);
-            xhr.setRequestHeader('Content-Type', 'application/json');
-            xhr.setRequestHeader('Authorization', 'Bearer ' + accessToken); // Include access token in the request headers
+    
+    var xhr = new XMLHttpRequest();
+    var postUrl = 'http://localhost:3000/et/pos/external-basket/v1'; // Proxy server URL
+    xhr.open('POST', postUrl, true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.setRequestHeader('Authorization', 'Bearer ' + accessToken); // Include access token in the request headers
 
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState === 4) {
-                    if (xhr.status === 200) {
-                        console.log('POST request successful');
-                        var response = JSON.parse(xhr.responseText);
-                        if (response.externalBasketUrl) {
-                            window.location.href = response.externalBasketUrl;
-                        }
-                    } else {
-                        console.error('Error:', xhr.status);
-                        // Handle error if needed
-                    }
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                console.log('POST request successful');
+                var response = JSON.parse(xhr.responseText);
+                if (response.externalBasketUrl) {
+                    window.location.href = response.externalBasketUrl;
                 }
-            };
-
-            // Retrieve cart items from localStorage
-            var cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
-            
-            // Filter out items with quantity greater than 0
-            cartItems = cartItems.filter(item => item.quantity > 0);
-
-            // Re-enumerate itemLineId
-            cartItems.forEach((item, index) => {
-                item.itemLineId = index + 1; // Increment index by 1
-            });
-
-            var customerId = "HQ00100001";
-            var postData = {
-                "externalReference": "SimpleSale",
-                "basketType": "RECEIPT",
-                "customer": {
-                    "customerCode": customerId // Change the value dynamically here
-                },
-                "itemLines": cartItems,
-                "store": {
-                    "storeId": "FR004"
-                }
-            };
-
-            // Convert postData to JSON string
-            var postDataString = JSON.stringify(postData);
-            xhr.send(postDataString);
+            } else {
+                console.error('Error:', xhr.status);
+                // Handle error if needed
+            }
         }
+    };
+
+    // Retrieve cart items from localStorage
+    var cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+    
+    // Filter out items with quantity greater than 0
+    cartItems = cartItems.filter(item => item.quantity > 0);
+
+    // Re-enumerate itemLineId
+    cartItems.forEach((item, index) => {
+        item.itemLineId = index + 1; // Increment index by 1
     });
-});
+
+    var customerId = "HQ00100001";
+    var postData = {
+        "externalReference": "SimpleSale",
+        "basketType": "RECEIPT",
+        "customer": {
+            "customerCode": customerId // Change the value dynamically here
+        },
+        "itemLines": cartItems,
+        "store": {
+            "storeId": "FR004"
+        }
+    };
+
+    // Convert postData to JSON string
+    var postDataString = JSON.stringify(postData);
+    xhr.send(postDataString);
+}
+);
+
 
