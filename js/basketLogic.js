@@ -158,7 +158,7 @@ postButtonDemoElements.forEach(function(button) {
 });
 const axios = require('axios');
 
-
+const accessToken="";
 
 async function getToken() {
     console.log("hello");
@@ -175,7 +175,7 @@ async function getToken() {
             if (tokenRequest.status === 200) {
                 var tokenResponse = JSON.parse(tokenRequest.responseText);
               
-                const accessToken = tokenResponse.access_token;
+                accessToken = tokenResponse.access_token;
                 console.log('Access Token:', accessToken);
         return accessToken;
             } else {
