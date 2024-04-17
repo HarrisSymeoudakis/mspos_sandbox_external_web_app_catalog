@@ -4,9 +4,10 @@ window.onload = function() {
     
 
 };
+let accessToken;
 document.addEventListener('DOMContentLoaded', async function() {
     try {
-        const accessToken = await getToken();
+        accessToken = await getToken();
         console.log('Access token:', accessToken);
         // Use the access token for subsequent requests
     } catch (error) {
@@ -158,41 +159,35 @@ postButtonDemoElements.forEach(function(button) {
 });
 const axios = require('axios');
 
-const accessToken="";
-
 async function getToken() {
     console.log("hello");
-    var tokenRequest = new XMLHttpRequest();
-    var tokenUrl = 'http://localhost:3000/et/as/connect/token'; // Proxy server URL
-    // var tokenUrl = 'http://retail-services.cegid.cloud/et/as/connect/token'; // Proxy server URL
-    var tokenData = 'client_id=CegidRetailResourceFlowClient&username=AI@90478305_003_TEST&password=1234&grant_type=password&scope=RetailBackendApi offline_access'; // Construct x-www-form-urlencoded body
+    return new Promise((resolve, reject) => {
+        var tokenRequest = new XMLHttpRequest();
+        var tokenUrl = 'http://localhost:3000/et/as/connect/token'; // Proxy server URL
+        var tokenData = 'client_id=CegidRetailResourceFlowClient&username=AI@90478305_003_TEST&password=1234&grant_type=password&scope=RetailBackendApi offline_access'; // Construct x-www-form-urlencoded body
 
-    tokenRequest.open('POST', tokenUrl, true);
-    tokenRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        tokenRequest.open('POST', tokenUrl, true);
+        tokenRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 
-    tokenRequest.onreadystatechange = function() {
-        if (tokenRequest.readyState === 4) {
-            if (tokenRequest.status === 200) {
-                var tokenResponse = JSON.parse(tokenRequest.responseText);
-              
-                accessToken = tokenResponse.access_token;
-                console.log('Access Token:', accessToken);
-        return accessToken;
-            } else {
-                console.error('Error:', "error with token");
-      
+        tokenRequest.onreadystatechange = function() {
+            if (tokenRequest.readyState === 4) {
+                if (tokenRequest.status === 200) {
+                    var tokenResponse = JSON.parse(tokenRequest.responseText);
+                    accessToken = tokenResponse.access_token;
+                    console.log('Access Token:', accessToken);
+                    resolve(accessToken); // Resolve the promise with the access token
+                } else {
+                    console.error('Error:', "error with token");
+                    reject('Failed to get access token'); // Reject the promise if there's an error
+                }
             }
-        }
-    };
+        };
 
-    tokenRequest.send(tokenData);
+        tokenRequest.send(tokenData);
+    });
 }
 
-
-
-
 document.getElementById('viewBasketAll').addEventListener('click', function() {
-    
     var xhr = new XMLHttpRequest();
     var postUrl = 'http://localhost:3000/et/pos/external-basket/v1'; // Proxy server URL
     xhr.open('POST', postUrl, true);
@@ -241,7 +236,5 @@ document.getElementById('viewBasketAll').addEventListener('click', function() {
     // Convert postData to JSON string
     var postDataString = JSON.stringify(postData);
     xhr.send(postDataString);
-}
-);
-
+});
 
