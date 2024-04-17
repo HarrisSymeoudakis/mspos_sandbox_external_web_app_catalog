@@ -5,9 +5,10 @@ window.onload = function() {
 
 };
 let accessToken;
+
 document.addEventListener('DOMContentLoaded', async function() {
     try {
-        accessToken = await getToken();
+        accessToken = await getToken(); // Assign access token retrieved from getToken to the global accessToken variable
         console.log('Access token:', accessToken);
         // Use the access token for subsequent requests
     } catch (error) {
