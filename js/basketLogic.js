@@ -203,6 +203,7 @@ document.getElementById('viewBasketAll').addEventListener('click', function() {
                 console.log('POST request successful');
                 var response = JSON.parse(xhr.responseText);
                 if (response.externalBasketUrl) {
+                    console.log(response.externalBasketUrl);
                     window.location.href = response.externalBasketUrl;
                 }
             } else {
