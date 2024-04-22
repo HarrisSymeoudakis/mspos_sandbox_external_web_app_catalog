@@ -152,7 +152,7 @@ var postButtonDemoElements = document.querySelectorAll('.postButtonDemo');
 
 postButtonDemoElements.forEach(function(button) {
     button.addEventListener('click', function(event) {
-        var urlStart = 'https://retail-services.cegid.cloud/t/pos/additem/';
+        var urlStart = 'https://retail-services.cegid.cloud/et/pos/additem/';
         var item = button.getAttribute('item');
         var newUrl = urlStart + item + '/1';
         window.location.href = newUrl;
