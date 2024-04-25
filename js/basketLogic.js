@@ -10,6 +10,9 @@ document.addEventListener('DOMContentLoaded', async function() {
     try {
         accessToken = await getToken(); // Assign access token retrieved from getToken to the global accessToken variable
         console.log('Access token:', accessToken);
+        setTimeout(() => {
+    console.log('Hello, World!');
+}, 1000);
         // Use the access token for subsequent requests
     } catch (error) {
         console.error('Failed to get access token:', error);
