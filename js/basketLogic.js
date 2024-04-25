@@ -10,9 +10,7 @@ document.addEventListener('DOMContentLoaded', async function() {
     try {
         accessToken = await getToken(); // Assign access token retrieved from getToken to the global accessToken variable
         console.log('Access token:', accessToken);
-        setTimeout(() => {
-    console.log('Hello, World!');
-}, 1000);
+        
         // Use the access token for subsequent requests
     } catch (error) {
         console.error('Failed to get access token:', error);
@@ -203,6 +201,9 @@ document.getElementById('viewBasketAll').addEventListener('click', function() {
         if (xhr.readyState === 4) {
             if (xhr.status === 200) {
                 console.log('POST request successful');
+                setTimeout(() => {
+    console.log('Hello, World!');
+}, 1000);
                 var response = JSON.parse(xhr.responseText);
                 if (response.externalBasketUrl) {
                     console.log(response.externalBasketUrl);
