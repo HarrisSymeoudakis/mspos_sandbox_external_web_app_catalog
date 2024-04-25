@@ -176,7 +176,6 @@ async function getToken() {
                 if (tokenRequest.status === 200) {
                     var tokenResponse = JSON.parse(tokenRequest.responseText);
                     accessToken = tokenResponse.access_token;
-                    console.log('Access Token:', accessToken);
                     resolve(accessToken); // Resolve the promise with the access token
                 } else {
                     console.error('Error:', "error with token");
