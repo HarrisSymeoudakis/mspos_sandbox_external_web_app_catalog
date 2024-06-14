@@ -227,7 +227,7 @@ document.getElementById('viewBasketAll').addEventListener('click', function() {
         item.itemLineId = index + 1; // Increment index by 1
     });
 
-    var customerId = "HQ00100001";
+    var customerId = "HQ00100005";
     var postData = {
         "externalReference": "SimpleSale",
         "basketType": "RECEIPT",
